@@ -8,12 +8,9 @@ export class AuthService {
     constructor(private userService: UsersService, private jwtService: JwtService){}
 
     async signIn(signInDto: SignInDto): Promise<any> {
-        const {username, pass} = signInDto
+        const { username, pass } = signInDto
 
         const user = await this.userService.findOne(username)
-        console.log(user);
-        console.log(pass);
-        
         
         if(user?.password !== pass){
             throw new UnauthorizedException()
@@ -23,6 +20,7 @@ export class AuthService {
         // Note: we choose a property name of sub to 
         // hold our userId value to be consistent with JWT standards. 
         const payload = { sub: user.userId, username: username }
+
         return {
             accessToken: await this.jwtService.signAsync(payload)
         }
