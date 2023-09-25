@@ -1,13 +1,12 @@
 import { CanActivate, ExecutionContext, Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { Observable } from "rxjs";
 import { Request } from "express";
-import { jwtConstants } from "./utils/constants";
 import { Reflector } from "@nestjs/core";
 import { IS_PUBLIC_KEY } from "./decorator/public.decorator";
 
 //we need the AuthGuard to return true when the
 //"isPublic" metadata is found. For this, we'll use the Reflector class. 
+
 
 @Injectable()
 export class AuthGuard implements CanActivate {

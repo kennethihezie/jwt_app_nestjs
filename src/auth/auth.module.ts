@@ -3,9 +3,10 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './utils/constants';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
+import { Constants } from './utils/constants';
+
 
 @Module({
   controllers: [AuthController],
@@ -21,8 +22,9 @@ import { AuthGuard } from './auth.guard';
     // easier for us. This means that we don't need to import
     // the JwtModule anywhere else in our application.
     global: true,
-    secret: jwtConstants.secret,
+    secret: Constants.SECRET_KEY,
     signOptions: { expiresIn: '2 days' }
-  })]
+  })],
 })
+
 export class AuthModule {}
